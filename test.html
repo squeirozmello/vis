@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<style>
+
+	body {
+	  font: 10px sans-serif;
+	}
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+
+	.x.axis path {
+	  display: none;
+	}
+
+	.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 1.5px;
+	}
+
+	</style>
+	<head>
+	</head>
+	<body>
+		<select id="options">
+			<option value="INDEX_GDAXI">DAX</option>
+			<option value="INDEX_GSPC">S&P500</option>
+			<option value="INDEX_VIX">VIX</option>
+			<option value="INDEX_N225">Nikkei 225</option>
+			<option value="INDEX_SSEC">Shanghai</option>
+			<option value="INDEX_NY">NYSE 100</option>
+			<option value="INDEX_STOXX50E">Eurostoxx</option>
+		</select>
+		<script type="text/javascript" src="lib/jquery/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="lib/d3/d3.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	</body>
+</html>
