@@ -21,106 +21,15 @@ VIS.utils.init = function(){
 		date = new Date(),
 		currentDay = date.getFullYear() + '-' + (parseInt(date.getMonth(),10)+1) + '-' + date.getDate();
 
-    VIS.utils.drawGraph('0','INDEX_GDAXI.json','1','INDEX_GSPC.json');
+    VIS.utils.drawGraph('0','INDEX_GDAXI.json','2', 'INDEX_VIX.json');
 	//VIS.utils.readData('result.json');
 	$('.options').change(function(){
 		var index1 = $('#options').val(),
-            file1 = VIS.globals.indexes[index1],
-            index2 = $('#options2').val(),
-            file2 = VIS.globals.indexes[index2];;
-        console.log(index1,index2);
+            file1 = VIS.globals.indexes[index1];
 		$('svg').remove();
-		VIS.utils.drawGraph(index1, file1 + '.json', index2, file2 + '.json');
+		VIS.utils.drawGraph(index1, file1 + '.json', '2', 'INDEX_VIX.json');
 	});	
 };
-
-VIS.utils.readData = function(url){
-	
-	d3.json('.\\' + url,function(obj){
-		var length = Object.keys(obj).length || 0,
-			i,
-			line,
-			j,
-			tempDay,
-			index;
-		VIS.index.quotes = obj;
-		// for(i = 0; i < length; i++){
-		// 	line = obj[i];
-		// 	console.log(line);
-		// 	j = 0;
-		// 	for(var quote in VIS.globals.indexes){
-				
-		// 		console.log(quote,line[j]);
-		// 		j++;
-		// 	}
-		// }
-
-	});
-
-};
-
-VIS.utils.calculateVolatility = function(index,period) {
-	
-	var quotes = VIS.index[index],
-		length = quotes.length,
-		day,
-		mean,
-		variance,
-		counter = 0;
-
-	for(var i = period ; i < length ; i++){
-		day = quotes[i];
-		mean = 0;
-		variance = 0;
-		for(var j = i - period; j < period + counter ; j++){
-			var dayAux = quotes[j],
-				nextDay = quotes[j+1],
-				returnValue = (nextDay[4]/dayAux[4])-1;
-				nextDay['return'] = returnValue;
-				quotes[j+1] = nextDay;
-			mean += returnValue;
-		}
-
-		mean = mean/period;
-
-		for(var j = i - period; j < period + counter; j++){
-			var dayAux = quotes[j],
-				returnValue = dayAux['return'] || 0,
-				varianceAux = returnValue * returnValue;
-			variance += varianceAux;
-		}
-		day['volatility'] = Math.sqrt(variance/length);
-		counter++;
-	}
-};
-
-VIS.utils.calculateMovingAverage = function(index,period){
-	var quotes = VIS.index[index],
-		length = quotes.length,
-		day,
-		mean,
-		counter = 0;
-    
-	for(var i = period ; i < length; i++){
-		day = quotes[i];
-		mean = 0;
-		for(var j = i - period; j < period + counter ; j++){
-			var dayAux = quotes[j];
-			mean += dayAux['close'];
-		}
-		counter++;
-		mean = mean/period;
-		day['ma'+period] = mean;
-	}
-};
-
-VIS.utils.createLine = function(index,url,panel){
-    var lineOne = d3.svg.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.close); });
-
-
-}
 
 VIS.utils.drawGraph = function(index,url,index2,url2){
 	var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -172,17 +81,12 @@ VIS.utils.drawGraph = function(index,url,index2,url2){
 			d.close = +d[4];
 		});
 
-		VIS.utils.calculateMovingAverage(index,10);
-		VIS.utils.calculateMovingAverage(index,25);
-		VIS.utils.calculateMovingAverage(index,200);
-		VIS.utils.calculateVolatility(index,10);
-
 		x.domain(d3.extent(data, function(d) { 
             if(d.date.getFullYear() >= 2007){
                 return d.date;
             }
         }));
-		y.domain(d3.extent(data, function(d) { return d.ma10; }));
+		y.domain(d3.extent(data, function(d) { return d[4]; }));
 		
 		svg.append('g')
 		  .attr('class', 'x axis')
@@ -216,17 +120,12 @@ VIS.utils.drawGraph = function(index,url,index2,url2){
             d.close = +d[4];
         });
 
-        VIS.utils.calculateMovingAverage(index2,10);
-        VIS.utils.calculateMovingAverage(index2,25);
-        VIS.utils.calculateMovingAverage(index2,200);
-        VIS.utils.calculateVolatility(index2,10);
-
         x.domain(d3.extent(data, function(d) { 
             if(d.date.getFullYear() >= 2007){
                 return d.date; 
             }
         }));
-        y.domain(d3.extent(data, function(d) { return d.ma10; }));
+        y.domain(d3.extent(data, function(d) { return d[4]; }));
         
         svg.append('g')
           .attr('class', 'x axis')
