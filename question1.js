@@ -1,15 +1,15 @@
 'use strict';
 var VIS = VIS || {};
 
-VIS.questionTwo = {
+VIS.questionOne = {
     
     el: 'body',
 
     initialize: function(){
         var that = this;
 
-        this.drawGraph('0','INDEX_GDAXI.json','2', 'INDEX_VIX.json');
-        this.setAttributes('0','INDEX_GDAXI.json','2', 'INDEX_VIX.json');
+        this.drawGraph('0','INDEX_GDAXI.json','1','INDEX_GSPC.json');
+        this.setAttributes('0','INDEX_GDAXI.json','1','INDEX_GSPC.json');
 
         $('#start_date').change(function(evt){
             var parser = d3.time.format('%Y-%m-%d').parse,
@@ -28,12 +28,14 @@ VIS.questionTwo = {
         });
 
         $('.options').change(function(){
-            var index1 = $('#options').val(),
-                file1 = VIS.globals.indexes[index1];
+        var index1 = $('#options').val(),
+            file1 = VIS.globals.indexes[index1],
+            index2 = $('#options2').val(),
+            file2 = VIS.globals.indexes[index2];;
+        
             $('svg').remove();
-            that.drawGraph(index1, file1 + '.json', '2', 'INDEX_VIX.json');
-            this.setAttributes(index1, file1 + '.json', '2', 'INDEX_VIX.json');
-        }); 
+            that.drawGraph(index1, file1 + '.json', index2, file2 + '.json');
+        });  
     },
     
     setAttributes: function(index1,file1,index2,file2){
@@ -80,9 +82,9 @@ VIS.questionTwo = {
             .scale(x)
             .orient('bottom');
 
-        // var yAxis = d3.svg.axis()
-        //     .scale(y)
-        //     .orient('left');
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient('left');
 
         var lineOne = d3.svg.line()
             .x(function(d) { return x(d.date); })
@@ -123,11 +125,6 @@ VIS.questionTwo = {
                 }
             }));
             y.domain(d3.extent(data, function(d) { return d[4]; }));
-            
-            svg.append('g')
-              .attr('class', 'x axis')
-              .attr('transform', 'translate(0,' + height + ')')
-              .call(xAxis);
 
             svg.append('path')
               .datum(data)
@@ -155,7 +152,22 @@ VIS.questionTwo = {
                 }
             }));
             y.domain(d3.extent(data, function(d) { return d[4]; }));
-        
+            
+            svg.append('g')
+              .attr('class', 'x axis')
+              .attr('transform', 'translate(0,' + height + ')')
+              .call(xAxis);
+            
+            svg.append('g')
+              .attr('class', 'y axis')
+              .call(yAxis)
+                .append('text')
+                  .attr('transform', 'rotate(-90)')
+                  .attr('y', 6)
+                  .attr('dy', '.71em')
+                  .style('text-anchor', 'end')
+                  .text('Price ($)');
+
             svg.append('path')
               .datum(data)
               .attr('class', 'line-two')
@@ -167,4 +179,4 @@ VIS.questionTwo = {
     }
 };
 
-VIS.questionTwo.initialize();
+VIS.questionOne.initialize();

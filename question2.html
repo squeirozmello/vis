@@ -30,6 +30,13 @@
 	  stroke-width: 1.5px;
 	}
 
+	.svg-style {
+		position: fixed;
+		top: 50px;
+		left: 10px;
+	}
+
+
 	</style>
 	<head>
 	</head>
@@ -37,14 +44,17 @@
 		<select id="options" class="options">
 			<option value="0">DAX</option>
 			<option value="1">S&P500</option>
-			<option value="2">VIX</option>
 			<option value="3">Nikkei 225</option>
 			<option value="4">Shanghai</option>
 			<option value="5">NYSE 100</option>
 			<option value="6">Eurostoxx</option>
 		</select>
+		<input type="text" id="start_date" placeholder="Start date (YYYY-MM-DD)"/>
+		<input type="text" id="end_date" placeholder="End date (YYYY-MM-DD)"/>		
+
 		<script type="text/javascript" src="lib/jquery/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="lib/d3/d3.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="question2.js"></script>
 	</body>
 </html>

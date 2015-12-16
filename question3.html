@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<style>
+
+	body {
+	  font: 10px sans-serif;
+	}
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+
+	.dot {
+	  stroke: #000;
+	}
+
+	.options {
+		float: left;
+	}
+
+	.date-container {
+		padding-left: 10px;
+		float: left;
+	}
+
+	.date-container p {
+	    float: left;
+	    margin: 0;
+	    line-height: 20px;
+	}
+
+	.date-container input {
+	    margin-left: 10px;
+	    width: 150px;
+	}
+
+	.info {
+		border: 1px solid rgba(158, 158, 158, 0.46);
+		border-radius: 3px;
+		width: 50px;
+		height: 70px
+	}
+
+	.hidden {
+		display: none;
+	}
+
+	.svg-style {
+		position: fixed;
+		top: 50px;
+		left: 10px;
+	}
+
+	.legend {
+		border: 1px solid rgba(158, 158, 158, 0.46);
+	    width: 75px;
+	    position: fixed;
+	    top: 50px;
+	    left: 980px;
+	}
+
+	.legend .title {
+	    margin: 0;
+	    left: 10px;
+	    position: absolute;
+	}
+
+	.legend .item {
+	    position: relative;
+	    margin: 25px 10px;
+	}
+
+	.legend .item p {
+		left: 10px
+	}
+
+	.legend .item .up {
+	    width: 10px;
+	    border: 1px solid green;
+	    height: 10px;
+	    background: green;
+	    right: 0;
+	    position: absolute;
+	    top: 0;
+	}
+
+	.legend .item .down {
+	    width: 10px;
+	    border: 1px solid red;
+	    height: 10px;
+	    background: red;
+	    right: 0;
+	    position: absolute;
+	    top: 0;
+	}
+
+	</style>
+	<head>
+	</head>
+	<body>
+		<select id="options" class="options">
+			<option value="0">DAX</option>
+			<option value="1">S&P500</option>
+			<option value="2">VIX</option>
+			<option value="3">Nikkei 225</option>
+			<option value="4">Shanghai</option>
+			<option value="5">NYSE 100</option>
+			<option value="6">Eurostoxx</option>
+		</select>
+		
+		<div class="date-container">
+			<p>Start date</p>
+			<input type="text" id="start_date" placeholder="YYYY-MM-DD"/>
+		</div>
+
+		<div class="date-container">
+			<p>End date</p>
+			<input type="text" id="end_date" placeholder="YYYY-MM-DD"/>
+		</div>
+		<div class="legend">
+			<p class="title">Trend</p>
+			<div class="item">
+				<p>Up</p>
+				<div class="up"></div>
+			</div>
+			<div class="item">
+				<p>Down</p>
+				<div class="down"></div>
+			</div>
+		</div>
+		<div class="info hidden"></div>
+		<script type="text/javascript" src="lib/jquery/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="lib/d3/d3.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="question3.js"></script>
+	</body>
+</html>

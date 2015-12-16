@@ -3,32 +3,45 @@
 	<meta charset="utf-8">
 	<style>
 
-	body {
-	  font: 10px sans-serif;
-	}
+		body {
+		  font: 10px sans-serif;
+		}
 
-	.axis path,
-	.axis line {
-	  fill: none;
-	  stroke: #000;
-	  shape-rendering: crispEdges;
-	}
+		.axis path,
+		.axis line {
+		  fill: none;
+		  stroke: #000;
+		  shape-rendering: crispEdges;
+		}
 
-	.x.axis path {
-	  display: none;
-	}
+		.x.axis path {
+		  display: none;
+		}
 
-	.line-one {
-	  fill: none;
-	  stroke: blue;
-	  stroke-width: 1.5px;
-	}
+		.line-one {
+		  fill: none;
+		  stroke: blue;
+		  stroke-width: 1.5px;
+		}
 
-	.line-two {
-	  fill: none;
-	  stroke: green;
-	  stroke-width: 1.5px;
-	}
+		.line-two {
+		  fill: none;
+		  stroke: green;
+		  stroke-width: 1.5px;
+		}
+
+		.info {
+			border: 1px solid rgba(158, 158, 158, 0.46);
+			border-radius: 3px;
+			width: 50px;
+			height: 70px
+		}
+
+		.svg-style {
+			position: fixed;
+			top: 50px;
+			left: 10px;
+		}
 
 	</style>
 	<head>
@@ -52,8 +65,12 @@
 			<option value="5">NYSE 100</option>
 			<option value="6">Eurostoxx</option>
 		</select>
+		<input type="text" id="start_date" placeholder="Start date (YYYY-MM-DD)"/>
+		<input type="text" id="end_date" placeholder="End date (YYYY-MM-DD)"/>
+		<div class="info hidden"></div>
 		<script type="text/javascript" src="lib/jquery/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="lib/d3/d3.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="question1.js"></script>
 	</body>
 </html>
