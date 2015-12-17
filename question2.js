@@ -101,7 +101,7 @@ VIS.questionTwo = {
                     .attr('height', height + margin.top + margin.bottom);
                 
 
-        d3.json('.\\' + url, function(error, data) {
+        d3.json('.\\datasets\\' + url, function(error, data) {
             VIS.index[index] = new Array();
             VIS.index[index] = data;
             if (error) throw error;

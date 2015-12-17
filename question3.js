@@ -160,7 +160,7 @@ VIS.questionThree = {
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        d3.json('.\\' + url, function(error, data) {
+        d3.json('.\\datasets\\' + url, function(error, data) {
             VIS.index[index] = new Array();
             VIS.index[index] = data;
             
