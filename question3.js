@@ -153,7 +153,7 @@ VIS.questionThree = {
 
         var color = d3.scale.category10();
 
-        var svg = d3.select("body").append("svg")
+        var svg = d3.select(".graph-box").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr('class', 'svg-style')
@@ -178,6 +178,10 @@ VIS.questionThree = {
                 d.close = +d[4];
                 d.trend = d['trend'];
                 d.volatility = d['volatility'];
+                d.open = d[1];
+                d.high = d[2];
+                d.low = d[3];
+                d.close = d[4];
             });
 
             data = that.createNewDataset(data);
@@ -227,6 +231,10 @@ VIS.questionThree = {
                     .attr("cx", function(d) { return  d && x(d.date); })
                     .attr("cy", function(d) { return d && y(d.close); })
                     .attr("volatility", function(d) { return d && Math.round(d.volatility*100000)/100000; })
+                    .attr("open", function(d) { return d && Math.round(d.open);})
+                    .attr("close", function(d) { return d && Math.round(d.close);})
+                    .attr("high", function(d) { return d && Math.round(d.high);})
+                    .attr("low", function(d) { return d && Math.round(d.low);})
                     .attr("date", function(d) {
                         var date = new Date(d && d.date),
                             day = date.getDate(),
@@ -259,16 +267,36 @@ VIS.questionThree = {
                 .text(function(d) { return d; });
             
             $('circle.dot').hover(function(evt){
-                var position = $(evt.currentTarget).position(),
-                    info = $('.info');
-                console.log($(evt.currentTarget).attr('date'),$(evt.currentTarget).attr('volatility'));
-                // position['position'] = 'fixed';
-                // info.removeClass('hidden');
-                // info.css(position);
-                // that.showDayInfo();
+                var target = $(evt.currentTarget),
+                    info = $('.info'),
+                    open = target[0].attributes[5].nodeValue;
+
+                that.showDayInfo(target,open);
             });            
         });
         
+    },
+
+    showDayInfo: function(data,open_data){
+        var volatility = $('.volatility-text'),
+            date = $('.date-text'),
+            open = $('.open-text'),
+            high = $('.high-text'),
+            close = $('.close-text'),
+            low = $('.low-text'),
+            volatility_data = data.attr('volatility'),
+            date_data = data.attr('date'),
+            high_data = data.attr('high'),
+            low_data = data.attr('low'),
+            close_data = data.attr('close');
+        
+        volatility.text(volatility_data);
+        date.text(date_data);
+        open.text(open_data);
+        high.text(high_data);
+        close.text(close_data);
+        low.text(low_data);
+
     }
 };
 

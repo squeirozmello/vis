@@ -28,16 +28,24 @@ VIS.questionOne = {
         });
 
         $('.options').change(function(){
-        var index1 = $('#options').val(),
-            file1 = VIS.globals.indexes[index1],
-            index2 = $('#options2').val(),
-            file2 = VIS.globals.indexes[index2];;
-        
-            $('svg').remove();
-            that.drawGraph(index1, file1 + '.json', index2, file2 + '.json');
+            var index1 = $('#options').val(),
+                index1_text = VIS.globals.indexName[index1],
+                file1 = VIS.globals.indexes[index1],
+                index2 = $('#options2').val(),
+                index2_text = VIS.globals.indexName[index2],
+                file2 = VIS.globals.indexes[index2];;
+                
+                that.setLegend(index1_text,index2_text);
+                $('svg').remove();
+                that.drawGraph(index1, file1 + '.json', index2, file2 + '.json');
         });  
     },
     
+    setLegend: function(index1,index2){
+        $('#index_title-1').text(index1);
+        $('#index_title-2').text(index2);
+    },
+
     setAttributes: function(index1,file1,index2,file2){
         this.index1 = index1;
         this.file1 = file1;
@@ -94,17 +102,16 @@ VIS.questionOne = {
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.close); });
 
-        var div = d3.select('body').append('div')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom + 100);
-
-        var svg = div.append('svg')
+        var svg = d3.select('.graph-box').append('svg')
             .attr('class', 'svg-style')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom);
+
+        // var svg = div.append('svg')
+            
         
-        div.append('g')
-            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+        // div.append('g')
+        //     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
         d3.json('.\\' + url, function(error, data) {
             VIS.index[index] = new Array();
@@ -151,28 +158,23 @@ VIS.questionOne = {
                     return d.date; 
                 }
             }));
-            y.domain(d3.extent(data, function(d) { return d[4]; }));
+            y.domain(d3.extent(data, function(d) { return d.close; }));
             
-            svg.append('g')
-              .attr('class', 'x axis')
-              .attr('transform', 'translate(0,' + height + ')')
-              .call(xAxis);
-            
-            svg.append('g')
-              .attr('class', 'y axis')
-              .call(yAxis)
-                .append('text')
-                  .attr('transform', 'rotate(-90)')
-                  .attr('y', 6)
-                  .attr('dy', '.71em')
-                  .style('text-anchor', 'end')
-                  .text('Price ($)');
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis)
+            .append("text")
+                .attr("class", "label")
+                .attr("x", width)
+                .style("text-anchor", "end")
+                .text("Time (Year)");
 
             svg.append('path')
-              .datum(data)
-              .attr('class', 'line-two')
-              .attr('stroke','green')
-              .attr('d', lineTwo);
+                .datum(data)
+                .attr('class', 'line-two')
+                .attr('stroke','green')
+                .attr('d', lineTwo);
 
             
         });

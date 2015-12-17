@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html>
 	<meta charset="utf-8">
-	<style>
-
-	body {
-	  font: 10px sans-serif;
-	}
-
-	.axis path,
-	.axis line {
-	  fill: none;
-	  stroke: #000;
-	  shape-rendering: crispEdges;
-	}
-
-	.x.axis path {
-	  display: none;
-	}
-
-	.line-one {
-	  fill: none;
-	  stroke: blue;
-	  stroke-width: 1.5px;
-	}
-
-	.line-two {
-	  fill: none;
-	  stroke: green;
-	  stroke-width: 1.5px;
-	}
-
-	.svg-style {
-		position: fixed;
-		top: 50px;
-		left: 10px;
-	}
-
-
-	</style>
 	<head>
 	</head>
 	<body>
-		<select id="options" class="options">
-			<option value="0">DAX</option>
-			<option value="1">S&P500</option>
-			<option value="3">Nikkei 225</option>
-			<option value="4">Shanghai</option>
-			<option value="5">NYSE 100</option>
-			<option value="6">Eurostoxx</option>
-		</select>
-		<input type="text" id="start_date" placeholder="Start date (YYYY-MM-DD)"/>
-		<input type="text" id="end_date" placeholder="End date (YYYY-MM-DD)"/>		
+		<div class="header">
+			<select id="options" class="options">
+				<option value="0">DAX</option>
+				<option value="1">S&P500</option>
+				<option value="2">VIX</option>
+				<option value="3">Nikkei 225</option>
+				<option value="4">Shanghai</option>
+				<option value="5">NYSE 100</option>
+				<option value="6">Eurostoxx</option>
+			</select>
+			
+			<div class="date-container">
+				<p class="bold">Start date</p>
+				<input type="text" id="start_date" placeholder="YYYY-MM-DD"/>
+			</div>
 
+			<div class="date-container">
+				<p class="bold">End date</p>
+				<input type="text" id="end_date" placeholder="YYYY-MM-DD"/>
+			</div>
+		</div>
+
+		<div class="graph-box">
+			<div class="legend">
+				<p class="bold">Index</p>
+				<div class="item">
+					<p id="index_title-1"class="bold">DAX</p>
+					<div class="index index-1"></div>
+				</div>
+				<div class="item">
+					<p id="index_title-2"class="bold">VIX</p>
+					<div class="index index-2"></div>
+				</div>
+			</div>
+			<div class="info hidden">
+				<p class="bold text">Date</p>
+				<p class="date-text text">None</p>
+				<p class="bold text">Open</p>
+				<p class="open-text text">0</p>
+				<p class="bold text">Low</p>
+				<p class="low-text text">0</p>
+				<p class="bold text">High</p>
+				<p class="high-text text">0</p>
+				<p class="bold text">Close</p>
+				<p class="close-text text">0</p>
+				<p class="bold text">Volatility</p>
+				<p class="volatility-text text">0</p>
+			</div>
+		</div>
+
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/javascript" src="lib/jquery/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="lib/d3/d3.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>

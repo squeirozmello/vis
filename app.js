@@ -13,6 +13,15 @@ VIS.globals.indexes = {
     '6': 'INDEX_STOXX50E'
 };
 
+VIS.globals.indexName = {
+    '0': 'DAX',
+    '1': 'S&P500',
+    '2': 'VIX',
+    '3': 'Nikkei 225',
+    '4': 'Shanghai',
+    '5': 'NYSE 100',
+    '6': 'Eurostoxx'
+};
 VIS.utils.calculateVolatility = function(index,period) {
     
     var quotes = VIS.index[index],

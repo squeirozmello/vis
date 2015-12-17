@@ -29,7 +29,10 @@ VIS.questionTwo = {
 
         $('.options').change(function(){
             var index1 = $('#options').val(),
-                file1 = VIS.globals.indexes[index1];
+                file1 = VIS.globals.indexes[index1],
+                index1_text = VIS.globals.indexName[index1];
+                
+            that.setLegend(index1_text);
             $('svg').remove();
             that.drawGraph(index1, file1 + '.json', '2', 'INDEX_VIX.json');
             this.setAttributes(index1, file1 + '.json', '2', 'INDEX_VIX.json');
@@ -41,6 +44,10 @@ VIS.questionTwo = {
         this.file1 = file1;
         this.index2 = index2;
         this.file2 = file2;
+    },
+
+    setLegend: function(index1){
+        $('#index_title-1').text(index1);
     },
 
     updateGraph: function(){
@@ -80,10 +87,6 @@ VIS.questionTwo = {
             .scale(x)
             .orient('bottom');
 
-        // var yAxis = d3.svg.axis()
-        //     .scale(y)
-        //     .orient('left');
-
         var lineOne = d3.svg.line()
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.close); });
@@ -92,17 +95,11 @@ VIS.questionTwo = {
             .x(function(d) { return x(d.date); })
             .y(function(d) { return y(d.close); });
 
-        var div = d3.select('body').append('div')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom + 100);
-
-        var svg = div.append('svg')
-            .attr('class', 'svg-style')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom);
-        
-        div.append('g')
-            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+        var svg = d3.select('.graph-box').append('svg')
+                    .attr('class', 'svg-style')
+                    .attr('width', width + margin.left + margin.right)
+                    .attr('height', height + margin.top + margin.bottom);
+                
 
         d3.json('.\\' + url, function(error, data) {
             VIS.index[index] = new Array();

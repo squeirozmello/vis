@@ -1,0 +1,160 @@
+body {
+  font: 10px sans-serif;
+}
+
+.header{
+    width: 1180px;
+    height: 40px;
+    position: fixed;
+    left: 50px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.options {
+    float: left;
+}
+
+.graph-box {
+    width: 1180px;
+    height: 600px;
+    position: fixed;
+    top: 50px;
+    left: 60px;
+}
+
+.date-container {
+    padding-left: 10px;
+    float: left;
+}
+
+.bold {
+    font-weight: bold;
+}
+.date-container p {
+    float: left;
+    margin: 0;
+    line-height: 20px;
+}
+
+.date-container input {
+    margin-left: 10px;
+    width: 150px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bold {
+    font-weight: bold;
+}
+.x.axis path {
+  display: none;
+}
+
+.line-one {
+  fill: none;
+  stroke: blue;
+  stroke-width: 1.5px;
+}
+
+.line-two {
+  fill: none;
+  stroke: green;
+  stroke-width: 1.5px;
+}
+
+.info {
+    border: 1px solid rgba(158, 158, 158, 0.46);
+    border-radius: 3px;
+    width: 75px;
+    height: 145px;
+    background: white;
+    position: absolute;
+    top: 90px;
+    right: 10px;
+
+}
+
+.info .text {
+    margin: 0 !important;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+.svg-style {
+    position: absolute;
+}
+
+.legend {
+    border: 1px solid rgba(158, 158, 158, 0.46);
+    width: 75px;
+    position: absolute;
+    right: 10px;
+}
+
+.legend .bold {
+    margin: 0;
+    position: relative;
+}
+
+.legend .index {
+    width: 15px;
+    height: 0;
+    right: 5px;
+    position: absolute;
+    top: 5px;
+}
+
+.legend .index.index-1{
+    border: 1px solid blue;
+    background: blue;
+}
+
+.legend .index.index-2{
+    border: 1px solid green;
+    background: green;
+}
+
+.legend .item {
+    position: relative;
+    margin: 15px 0;
+}
+
+.legend .item .up {
+    width: 10px;
+    border: 1px solid green;
+    height: 10px;
+    background: green;
+    right: 0;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+}
+
+.legend .item .down {
+    width: 10px;
+    border: 1px solid red;
+    height: 10px;
+    background: red;
+    right: 0;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+}
