@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<head>
+	</head>
+	<body>
+		<div class="header">
+			<select id="options" class="options">
+				<option value="0">DAX</option>
+				<option value="1">S&P500</option>
+				<option value="2">VIX</option>
+				<option value="3">Nikkei 225</option>
+				<option value="4">Shanghai</option>
+				<option value="5">NYSE 100</option>
+				<option value="6">Eurostoxx</option>
+			</select>
+			
+			<div class="date-container">
+                <p class="bold">Start date</p>
+                <input type="text" id="start_date" placeholder="YYYY-MM-DD"/>
+            </div>
+
+            <div class="date-container">
+                <p class="bold">End date</p>
+                <input type="text" id="end_date" placeholder="YYYY-MM-DD"/>
+            </div>
+            <div class="timeframe">
+                    <button class="timeframe-button active" type="button" name="day">Daily</button>
+            </div>
+            <div class="timeframe" style="left: 70px;">
+                <button class="timeframe-button" type="button" name="weekly">Weekly</button>
+            </div>
+            <div class="timeframe" style="left: 140px;">
+                <button class="timeframe-button" type="button" name="monthly" >Monthly</button>
+            </div>
+		</div>
+
+		<div class="graph-box">
+			<div class="legend">
+				<p class="bold">Index</p>
+				<div class="item">
+					<p id="index_title-1"class="bold">DAX</p>
+					<div class="index index-1"></div>
+				</div>
+				<div class="item">
+					<p id="index_title-2"class="bold">VIX</p>
+					<div class="index index-2"></div>
+				</div>
+			</div>
+
+			<div class="item" style="
+			    position: absolute;
+			    width: 80px;
+			    top: 100px;
+			    right: 10px;
+			    border: 1px solid #D2D2D2;
+			">
+				<p style="padding: 0;">Lehman Brothers bankruptcy</p>
+				<div class="" style="
+				    border: 1px solid red;
+				    height: 5px;
+				    background: red;
+				"></div>
+			</div>
+			<div class="item" style="
+			    position: absolute;
+			    width: 80px;
+			    top: 152px;
+			    right: 10px;
+			    border: 1px solid #D2D2D2;
+			">
+				<p style="padding: 0;">Debt Crisis</p>
+				<div class="" style="
+				    border: 1px solid yellow;
+				    height: 5px;
+				    background: yellow;
+				"></div>
+			</div>
+			<div class="item" style="
+			    position: absolute;
+			    width: 80px;
+			    top: 192px;
+			    right: 10px;
+			    border: 1px solid #D2D2D2;
+			">
+				<p style="padding: 0;">Chinese Buble</p>
+				<div class="" style="
+				    border: 1px solid orange;
+				    height: 5px;
+				    background: orange;
+				"></div>
+			</div>
+		</div>
+
+		
+
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript" src="lib/jquery/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="lib/d3/d3.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="question5.js"></script>
+	</body>
+</html>
