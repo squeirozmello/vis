@@ -8,9 +8,10 @@ VIS.questionOne = {
     initialize: function(){
         var that = this;
 
-        this.drawGraph('0','INDEX_GDAXI.json','1','INDEX_GSPC.json');
-        this.setAttributes('0','INDEX_GDAXI.json','1','INDEX_GSPC.json');
-
+        this.drawGraph('0','INDEX_GDAXI-day.json','1','INDEX_GSPC-day.json');
+        this.setAttributes('0','INDEX_GDAXI-day.json','1','INDEX_GSPC-day.json','day');
+        this.timeframe = 'day';
+        
         $('#start_date').change(function(evt){
             var parser = d3.time.format('%Y-%m-%d').parse,
                 date = parser($(evt.currentTarget).val());
@@ -33,12 +34,28 @@ VIS.questionOne = {
                 file1 = VIS.globals.indexes[index1],
                 index2 = $('#options2').val(),
                 index2_text = VIS.globals.indexName[index2],
-                file2 = VIS.globals.indexes[index2];;
-                
+                file2 = VIS.globals.indexes[index2];
+
+                that.setAttributes(index1,file1,index2,file2,that.timeframe);
                 that.setLegend(index1_text,index2_text);
-                $('svg').remove();
-                that.drawGraph(index1, file1 + '.json', index2, file2 + '.json');
-        });  
+                that.updateGraph();
+        });
+
+        $('.timeframe-button').click(function(){
+            var index1 = $('#options').val(),
+                index1_text = VIS.globals.indexName[index1],
+                file1 = VIS.globals.indexes[index1],
+                index2 = $('#options2').val(),
+                index2_text = VIS.globals.indexName[index2],
+                file2 = VIS.globals.indexes[index2],
+                timeframe = $(this).attr('name');
+                
+                $('.timeframe-button').removeClass('active');
+                $(this).addClass('active');
+                that.setAttributes(index1,file1,index2,file2,timeframe);
+                that.setLegend(index1_text,index2_text);
+                that.updateGraph();
+        });    
     },
     
     setLegend: function(index1,index2){
@@ -46,17 +63,20 @@ VIS.questionOne = {
         $('#index_title-2').text(index2);
     },
 
-    setAttributes: function(index1,file1,index2,file2){
+    setAttributes: function(index1,file1,index2,file2,timeframe){
         this.index1 = index1;
         this.file1 = file1;
         this.index2 = index2;
         this.file2 = file2;
+        this.timeframe = timeframe;
     },
 
     updateGraph: function(){
         $('svg').remove();
-        this.drawGraph(this.index1,this.file1,this.index2,this.file2,this.start_date,this.end_date);
-        console.log(this.start_date,this.end_date);
+        var file1 = this.file1 + '-' + this.timeframe  + '.json',
+            file2 = this.file2 + '-' + this.timeframe + '.json';
+        
+        this.drawGraph(this.index1,file1,this.index2,file2,this.start_date,this.end_date);
     },
 
     createNewDataset: function(arr){
@@ -107,12 +127,6 @@ VIS.questionOne = {
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom);
 
-        // var svg = div.append('svg')
-            
-        
-        // div.append('g')
-        //     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
         d3.json('.\\datasets\\' + url, function(error, data) {
             VIS.index[index] = new Array();
             VIS.index[index] = data;
@@ -140,7 +154,7 @@ VIS.questionOne = {
 
         });
 
-        d3.json('.\\' + url2, function(error, data) {
+        d3.json('.\\datasets\\' + url2, function(error, data) {
             VIS.index[index2] = new Array();
             VIS.index[index2] = data;
             if (error) throw error;

@@ -16,14 +16,26 @@
 			</select>
 			
 			<div class="date-container">
-				<p class="bold">Start date</p>
-				<input type="text" id="start_date" placeholder="YYYY-MM-DD"/>
-			</div>
+                <p class="bold">Start date</p>
+                <input type="text" id="start_date" placeholder="YYYY-MM-DD"/>
+            </div>
 
-			<div class="date-container">
-				<p class="bold">End date</p>
-				<input type="text" id="end_date" placeholder="YYYY-MM-DD"/>
-			</div>
+            <div class="date-container">
+                <p class="bold">End date</p>
+                <input type="text" id="end_date" placeholder="YYYY-MM-DD"/>
+            </div>
+            <div class="timeframe">
+                    <button class="timeframe-button active" type="button" name="day">Daily</button>
+            </div>
+            <div class="timeframe" style="left: 70px;">
+                <button class="timeframe-button" type="button" name="weekly" disabled="true">Weekly</button>
+            </div>
+            <div class="timeframe" style="left: 140px;">
+                <button class="timeframe-button" type="button" name="monthly" disabled="true">Monthly</button>
+            </div>
+            <div class="timeframe" style="left: 210px;">
+                <button class="timeframe-button" type="button" name="annual" disabled="true">Annualy</button>
+            </div>
 		</div>
 		<div class="graph-box">
 			<div class="legend">

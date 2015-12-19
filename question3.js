@@ -4,16 +4,8 @@ VIS.questionThree = {
     initialize: function(){
         var that = this;
 
-        this.drawGraph('0','INDEX_GDAXI.json');
-        this.setAttributes('0','INDEX_GDAXI.json');
-
-        $('.options').change(function(){
-            var index1 = $('#options').val(),
-                file1 = VIS.globals.indexes[index1];
-            $('svg').remove();
-            that.drawGraph(index1, file1 + '.json');
-            that.setAttributes(index1, file1 + '.json');
-        });
+        this.drawGraph('0','INDEX_GDAXI-day.json');
+        this.setAttributes('0','INDEX_GDAXI-day.json');
 
         $('#start_date').change(function(evt){
             var parser = d3.time.format('%Y-%m-%d').parse,
@@ -30,17 +22,48 @@ VIS.questionThree = {
             that.end_date = date;
             that.updateGraph();
         });
+
+        $('.options').change(function(){
+            var index1 = $('#options').val(),
+                index1_text = VIS.globals.indexName[index1],
+                file1 = VIS.globals.indexes[index1],
+                index2 = $('#options2').val(),
+                index2_text = VIS.globals.indexName[index2],
+                file2 = VIS.globals.indexes[index2];
+
+                that.setAttributes(index1,file1,index2,file2,that.timeframe);
+                that.updateGraph();
+        });
+
+        $('.timeframe-button').click(function(){
+            var index1 = $('#options').val(),
+                index1_text = VIS.globals.indexName[index1],
+                file1 = VIS.globals.indexes[index1],
+                index2 = $('#options2').val(),
+                index2_text = VIS.globals.indexName[index2],
+                file2 = VIS.globals.indexes[index2],
+                timeframe = $(this).attr('name');
+                
+                $('.timeframe-button').removeClass('active');
+                $(this).addClass('active');
+                that.setAttributes(index1,file1,index2,file2,timeframe);
+                that.updateGraph();
+        });
     },
 
-    setAttributes: function(index1,file1){
+    setAttributes: function(index1,file1,index2,file2,timeframe){
         this.index1 = index1;
         this.file1 = file1;
+        this.index2 = index2;
+        this.file2 = file2;
+        this.timeframe = timeframe;
     },
 
     updateGraph: function(){
         $('svg').remove();
-        this.drawGraph(this.index1,this.file1,this.start_date,this.end_date);
-        console.log(this.start_date,this.end_date);
+        var file1 = this.file1 + '-' + 'day'  + '.json';
+        
+        this.drawGraph(this.index1,file1,this.start_date,this.end_date);
     },
 
     calculateMovingAverage: function(index,period){

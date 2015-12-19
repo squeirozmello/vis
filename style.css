@@ -20,8 +20,24 @@ body {
   stroke: #000;
 }
 
+.active {
+    background-color: #2B91FE;
+    border-radius: 3px;
+    box-shadow: none;
+    color: white;
+}
+
 .options {
     float: left;
+}
+
+.timeframe {
+    position: absolute;
+    top: 20px;
+}
+.timeframe-button {
+    width: 60px;
+    height: 20px;
 }
 
 .graph-box {

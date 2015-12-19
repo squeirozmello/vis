@@ -8,7 +8,6 @@
 			<select id="options" class="options">
 				<option value="0">DAX</option>
 				<option value="1">S&P500</option>
-				<option value="2">VIX</option>
 				<option value="3">Nikkei 225</option>
 				<option value="4">Shanghai</option>
 				<option value="5">NYSE 100</option>
@@ -16,14 +15,26 @@
 			</select>
 			
 			<div class="date-container">
-				<p class="bold">Start date</p>
-				<input type="text" id="start_date" placeholder="YYYY-MM-DD"/>
-			</div>
+                <p class="bold">Start date</p>
+                <input type="text" id="start_date" placeholder="YYYY-MM-DD"/>
+            </div>
 
-			<div class="date-container">
-				<p class="bold">End date</p>
-				<input type="text" id="end_date" placeholder="YYYY-MM-DD"/>
-			</div>
+            <div class="date-container">
+                <p class="bold">End date</p>
+                <input type="text" id="end_date" placeholder="YYYY-MM-DD"/>
+            </div>
+            <div class="timeframe">
+                    <button class="timeframe-button active" type="button" name="day">Daily</button>
+            </div>
+            <div class="timeframe" style="left: 70px;">
+                <button class="timeframe-button" type="button" name="weekly">Weekly</button>
+            </div>
+            <div class="timeframe" style="left: 140px;">
+                <button class="timeframe-button" type="button" name="monthly" >Monthly</button>
+            </div>
+            <div class="timeframe" style="left: 210px;">
+                <button class="timeframe-button" type="button" name="annual" >Annualy</button>
+            </div>
 		</div>
 
 		<div class="graph-box">
@@ -37,20 +48,6 @@
 					<p id="index_title-2"class="bold">VIX</p>
 					<div class="index index-2"></div>
 				</div>
-			</div>
-			<div class="info hidden">
-				<p class="bold text">Date</p>
-				<p class="date-text text">None</p>
-				<p class="bold text">Open</p>
-				<p class="open-text text">0</p>
-				<p class="bold text">Low</p>
-				<p class="low-text text">0</p>
-				<p class="bold text">High</p>
-				<p class="high-text text">0</p>
-				<p class="bold text">Close</p>
-				<p class="close-text text">0</p>
-				<p class="bold text">Volatility</p>
-				<p class="volatility-text text">0</p>
 			</div>
 		</div>
 
